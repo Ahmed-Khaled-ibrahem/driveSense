@@ -1,16 +1,20 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'app/app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'app/providers/all_app_provider.dart';
+import 'firebase_options.dart';
 
 void main() {
-
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await EasyLocalization.ensureInitialized();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
 
       FlutterError.onError = (FlutterErrorDetails details) {
         FlutterError.dumpErrorToConsole(details);
@@ -30,7 +34,10 @@ void main() {
           supportedLocales: const [Locale('en'), Locale('ar')],
           path: 'assets/translations',
           fallbackLocale: const Locale('en'),
-          child: UncontrolledProviderScope(container: globalContainer,child: App(),),
+          child: UncontrolledProviderScope(
+            container: globalContainer,
+            child: App(),
+          ),
         ),
       );
     },

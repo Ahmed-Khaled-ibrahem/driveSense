@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../auth/profile_model.dart';
 import '../contacts/contacts_Screen.dart';
 import '../drive/drive_screen.dart';
 import '../instructions/instructions_screen.dart';
@@ -7,7 +8,10 @@ import '../reports_driver/reports.dart';
 import '../settings/presentation/pages/settings_page.dart';
 
 class Homescreen extends ConsumerStatefulWidget {
-  const Homescreen({super.key});
+  final Profile profile;
+
+  const Homescreen({super.key, required this.profile});
+
   @override
   ConsumerState createState() => _HomescreenState();
 }
@@ -17,13 +21,19 @@ class _HomescreenState extends ConsumerState<Homescreen> {
   final double notActiveIconSize = 25;
   final double activeIconSize = 32.0;
 
-  final List<Widget> _pages = [
-    DriveScreen(),
-    ReportsScreen(),
-    SettingsPage(),
-    InstructionsScreen(),
-    ContactListScreen(),
-  ];
+  List<Widget> _pages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      DriveScreen(widget.profile),
+      ReportsScreen(),
+      SettingsPage(),
+      InstructionsScreen(),
+      ContactsScreen(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

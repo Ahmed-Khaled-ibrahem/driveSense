@@ -1,22 +1,42 @@
+import 'package:drivesense/app/widgets/show_confirm_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../app/services/firebase_realtime_db.dart';
 import '../../../../app/theme/theme_provider.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
-
   @override
   SettingsPageState createState() => SettingsPageState();
 }
 
 class SettingsPageState extends ConsumerState<SettingsPage> {
+  final FirebaseDatabaseHelper _databaseHelper =
+      FirebaseDatabaseHelper.instance;
 
   final double spacing = 8;
   bool soundAlert = false;
   bool vibration = false;
   bool contactsAlert = false;
   bool mobileAlerts = false;
+
+  @override
+  void initState() {
+    super.initState();
+    readSettings();
+  }
+
+  void readSettings() async {
+    final settings = await _databaseHelper.read("settings");
+    soundAlert = settings['buzzer'];
+    vibration = settings['vibration'];
+    contactsAlert = settings['contacts'];
+    mobileAlerts = settings['alerts'];
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +110,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             onSelectionChanged: (selection) async {
               setState(() {
                 soundAlert = selection.first;
+                _databaseHelper.update("settings", {"buzzer": soundAlert});
               });
             },
           ),
@@ -105,11 +126,15 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             onSelectionChanged: (selection) async {
               setState(() {
                 vibration = selection.first;
+                _databaseHelper.update("settings", {"vibration": vibration});
               });
             },
           ),
           SizedBox(height: spacing),
-          Text('Contacts alerts', style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            'Contacts alerts',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
@@ -120,6 +145,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             onSelectionChanged: (selection) async {
               setState(() {
                 contactsAlert = selection.first;
+                _databaseHelper.update("settings", {"contacts": contactsAlert});
               });
             },
           ),
@@ -135,10 +161,35 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             onSelectionChanged: (selection) async {
               setState(() {
                 mobileAlerts = selection.first;
+                _databaseHelper.update("settings", {"alerts": mobileAlerts});
               });
             },
           ),
-
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              bool isConfirmed = await showConfirmationDialog(
+                'settings.logout_confirmation'.tr(),
+                'are_you_sure'.tr(),
+                context,
+              );
+              if (!isConfirmed) {
+                return;
+              }
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setBool('rememberMe', false);
+              context.go('/login');
+            },
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: Text('settings.logout'.tr()),
+          ),
         ],
       ),
     );
