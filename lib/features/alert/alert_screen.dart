@@ -5,7 +5,6 @@ import '../../app/services/firebase_realtime_db.dart';
 
 class AlertScreen extends StatefulWidget {
   const AlertScreen({super.key});
-
   @override
   State<AlertScreen> createState() => _AlertScreenState();
 }

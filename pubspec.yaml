@@ -23,6 +23,7 @@ dependencies:
   http: ^1.5.0
   firebase_core: ^2.20.0
   firebase_database: ^10.1.0
+  timelines_plus: ^1.0.7
 
 dev_dependencies:
   flutter_test:

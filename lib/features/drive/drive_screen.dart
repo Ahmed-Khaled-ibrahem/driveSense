@@ -1,7 +1,9 @@
 import 'package:drivesense/features/auth/profile_model.dart';
 import 'package:drivesense/features/drive/providers/online_provider.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../reports_driver/session_provider.dart';
 import 'camera_stream_widget.dart';
 
 class DriveScreen extends ConsumerStatefulWidget {
@@ -15,10 +17,20 @@ class DriveScreen extends ConsumerStatefulWidget {
 
 class DriveScreenState extends ConsumerState<DriveScreen> {
   bool isDriving = false;
+  late DatabaseReference db;
+
+  @override
+  void initState() {
+    super.initState();
+    db = FirebaseDatabase.instance.ref(
+      'profiles/${widget.profile.id}/sessions',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final online = ref.watch(onlineStatusProvider);
+    final reporter = ref.read(reportingSessionProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Drive Sense'), centerTitle: true),
@@ -155,6 +167,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () {
+                                  reporter.endSession(db);
                                   setState(() {
                                     isDriving = false;
                                   });
@@ -188,6 +201,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () {
+                                  reporter.startSession();
                                   setState(() {
                                     isDriving = true;
                                   });

@@ -28,7 +28,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
     super.initState();
     _pages = [
       DriveScreen(widget.profile),
-      ReportsScreen(),
+      ReportsScreen(profile: widget.profile,),
       SettingsPage(),
       InstructionsScreen(),
       ContactsScreen(),

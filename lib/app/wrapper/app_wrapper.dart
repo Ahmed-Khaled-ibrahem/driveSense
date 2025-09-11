@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/reports_driver/session_provider.dart';
 import '../routes/app_router.dart';
 import '../services/firebase_realtime_db.dart';
 
@@ -19,8 +20,11 @@ class AppWrapperState extends ConsumerState<AppWrapper> {
   FirebaseDatabaseHelper dbHelper = FirebaseDatabaseHelper.instance;
 
   onChange(isDetected) {
+    final reporter = ref.read(reportingSessionProvider.notifier);
+
     if (isDetected) {
       openAlert(context, ref);
+      reporter.addMistake();
     } else {
       if (ref.read(isAlertOpenProvider)) {
         ref.read(isAlertOpenProvider.notifier).state = false;
