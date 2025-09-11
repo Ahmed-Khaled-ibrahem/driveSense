@@ -31,15 +31,15 @@ class _ProfileViewScreenState extends ConsumerState<ProfileViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text('profile'.tr()),
         actions: [
           IconButton(
             onPressed: () {
               if (widget.profile.id == widget.myProfile.id) {
                 // you can not remove your own profile
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('You can not remove your own profile'),
+                  SnackBar(
+                    content: Text('you_can_not_remove_your_own_profile'.tr()),
                   ),
                 );
                 return;
@@ -126,7 +126,7 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
           return Center(child: Text('Error: ${asyncSnapshot.error}'));
         }
         if (data.isEmpty) {
-          return Center(child: Text('No data found'.tr()));
+          return Center(child: Text('no_data_found'.tr()));
         }
 
         return Timeline.tileBuilder(
@@ -147,7 +147,10 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  DateFormat('EEEE, dd-MM-yyyy').format(data[index].date),
+                  DateFormat(
+                    'EEEE, dd-MM-yyyy',
+                    context.locale.languageCode,
+                  ).format(data[index].date),
                   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 14),
                   textAlign: TextAlign.center,
                 ),
@@ -156,7 +159,10 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
                     TripSessionModel.delete(db, data[index]);
                     setState(() {});
                   },
-                  child: Text('Delete', style: TextStyle(color: Colors.red)),
+                  child: Text(
+                    'delete'.tr(),
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
               ],
             ),
@@ -166,7 +172,7 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
                   : Color(0xff223c73),
               child: ListTile(
                 title: Text(
-                  'Trip Session',
+                  'trip_session'.tr(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Column(
@@ -175,15 +181,15 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Started at ${DateFormat('hh:mm:ss').format(data[index].startTime)}',
+                      '${'started_at'.tr()} ${DateFormat('hh:mm:ss').format(data[index].startTime)}',
                       style: TextStyle(fontSize: 12),
                     ),
                     Text(
-                      'Ended   at ${DateFormat('hh:mm:ss').format(data[index].endTime)}',
+                      '${'ended_at'.tr()} ${DateFormat('hh:mm:ss').format(data[index].endTime)}',
                       style: TextStyle(fontSize: 12),
                     ),
                     Text(
-                      'Duration  ${timeDiff(data[index].startTime, data[index].endTime)}',
+                      '${'duration'.tr()}   ${timeDiff(data[index].startTime, data[index].endTime)}',
                       style: TextStyle(fontSize: 12),
                     ),
                   ],

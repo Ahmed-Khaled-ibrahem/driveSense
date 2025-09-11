@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
@@ -5,6 +6,7 @@ import '../../app/services/firebase_realtime_db.dart';
 
 class AlertScreen extends StatefulWidget {
   const AlertScreen({super.key});
+
   @override
   State<AlertScreen> createState() => _AlertScreenState();
 }
@@ -15,17 +17,17 @@ class _AlertScreenState extends State<AlertScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Alert Screen'), centerTitle: true),
+      appBar: AppBar(title: Text('alert'.tr()), centerTitle: true),
       body: Column(
         children: [
           Lottie.asset('assets/lottie/Sleeping.json'),
           Text(
-            'Drowsiness Detected',
+            'drowsiness_detected'.tr(),
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           Text(
-            'Stop driving and take a break for 10 seconds',
+            'stop_driving_and_take_a_break'.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w200),
           ),
@@ -39,7 +41,7 @@ class _AlertScreenState extends State<AlertScreen> {
               backgroundColor: Color(0xff450a85),
               foregroundColor: Color(0xffccafea),
             ),
-            child: Text('I Am Good Now 👍'),
+            child: Text('${'i_am_good_now'.tr()} 👍'),
           ),
         ],
       ),

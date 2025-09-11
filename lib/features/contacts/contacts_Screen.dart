@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ import 'copy_button.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({super.key});
+
   @override
   State<ContactsScreen> createState() => _ContactsScreenState();
 }
@@ -21,7 +23,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Contacts")),
+      appBar: AppBar(title: Text("contacts".tr())),
       body: Column(
         children: [
           Container(
@@ -51,7 +53,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Telegram",
+                          "telegram".tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -59,7 +61,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                           ),
                         ),
                         Text(
-                          "before activation you need to send message to this bot",
+                          "before_advice".tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -98,7 +100,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 final contacts = snapshot.data!;
 
                 if (contacts.isEmpty) {
-                  return const Center(child: Text("No contacts yet"));
+                  return Center(child: Text("no_contacts_yet".tr()));
                 }
                 return ListView.separated(
                   separatorBuilder: (context, index) => const Divider(),
@@ -159,7 +161,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
                                 ),
                               ),
                               Text(
-                                c.userName == '' ? 'Not Activated' : c.userName,
+                                c.userName == ''
+                                    ? 'not_activated'.tr()
+                                    : c.userName,
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey,
@@ -171,8 +175,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
                           trailing: IconButton(
                             onPressed: () async {
                               bool isConfirmed = await showConfirmationDialog(
-                                "Are you sure you want to delete this contact?",
-                                "Confirmation",
+                                "Aare_you_sure_contacts".tr(),
+                                "confirmation".tr(),
                                 context,
                               );
                               if (!isConfirmed) return;
@@ -204,8 +208,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
                                     onPressed: () async {
                                       bool
                                       isConfirmed = await showConfirmationDialog(
-                                        "Make sure that you send the message to the bot in the last minute",
-                                        "Confirmation",
+                                        "make_sure_that_you_send_the_message_to_the_bot_in_the_last_minute"
+                                            .tr(),
+                                        "confirmation".tr(),
                                         context,
                                       );
                                       if (!isConfirmed) return;
@@ -213,7 +218,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                                       await dbHelper.activateContact(c);
                                       setState(() {});
                                     },
-                                    child: const Text("Activate"),
+                                    child: Text("activate".tr()),
                                   ),
                                 ),
                               ),
@@ -237,14 +242,14 @@ class _ContactsScreenState extends State<ContactsScreen> {
           await showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              title: const Text("Add Contact"),
+              title: Text("add_contact".tr()),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFormField(
                     controller: nameController,
-                    decoration: const InputDecoration(
-                      labelText: "Name",
+                    decoration: InputDecoration(
+                      labelText: "name".tr(),
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -256,7 +261,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     style: const TextStyle(fontSize: 18),
                     decoration: InputDecoration(
-                      labelText: "Number",
+                      labelText: "number".tr(),
                       border: OutlineInputBorder(),
                       prefix: const Text("+966 "),
                     ),
@@ -277,7 +282,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     context.pop(context);
                     setState(() {});
                   },
-                  child: const Text("Save"),
+                  child: Text("save".tr()),
                 ),
               ],
             ),

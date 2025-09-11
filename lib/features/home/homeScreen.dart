@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../auth/profile_model.dart';
@@ -70,7 +71,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
               width: activeIconSize,
               height: activeIconSize,
             ),
-            label: "Drive",
+            label: "drive".tr(),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -86,7 +87,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
               width: activeIconSize,
               height: activeIconSize,
             ),
-            label: "Reports",
+            label: "reports".tr(),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -102,7 +103,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
               width: activeIconSize,
               height: activeIconSize,
             ),
-            label: "Settings",
+            label: "settings".tr(),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -118,7 +119,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
               width: activeIconSize,
               height: activeIconSize,
             ),
-            label: "instructions",
+            label: "instructions".tr(),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -134,7 +135,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
               width: activeIconSize,
               height: activeIconSize,
             ),
-            label: "Contacts",
+            label: "contacts".tr(),
           ),
         ],
       ),

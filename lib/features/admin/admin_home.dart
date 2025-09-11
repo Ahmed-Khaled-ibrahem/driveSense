@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -81,7 +82,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome 👋',
+                        '${'welcome'.tr()} 👋',
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 18,
@@ -99,7 +100,6 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                     ],
                   ),
                 ),
-
                 SizedBox(
                   width: 80,
                   height: 60,
@@ -114,7 +114,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
           Padding(
             padding: const EdgeInsets.all(15),
             child: Text(
-              'Accounts',
+              'accounts'.tr(),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
@@ -140,7 +140,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                 final contacts = snapshot.data!;
 
                 if (contacts.isEmpty) {
-                  return const Center(child: Text("No profiles yet"));
+                  return Center(child: Text("no_profiles".tr()));
                 }
                 return ListView.separated(
                   separatorBuilder: (context, index) => const Divider(),

@@ -1,5 +1,6 @@
 import 'package:drivesense/features/auth/profile_model.dart';
 import 'package:drivesense/features/drive/providers/online_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -77,7 +78,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome 👋',
+                        '${'welcome'.tr()} 👋',
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 18,
@@ -133,7 +134,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                           Icon(Icons.circle, color: Colors.green),
                           SizedBox(width: 10),
                           Text(
-                            'Ready',
+                            'ready'.tr(),
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -145,7 +146,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                         Icon(Icons.circle, color: Colors.red),
                         SizedBox(width: 10),
                         Text(
-                          'Offline',
+                          'offline'.tr(),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -159,7 +160,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Detecting in progress...'),
+                          Text('detecting'.tr()),
                           const SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -182,7 +183,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                                     borderRadius: BorderRadius.circular(7),
                                   ),
                                 ),
-                                child: const Text('Finish'),
+                                child: Text('finish'.tr()),
                               ),
                             ),
                           ),
@@ -193,7 +194,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Click start to begin with driving'),
+                          Text('click_start_to_begin_with_driving'.tr()),
                           SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -216,7 +217,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                                     borderRadius: BorderRadius.circular(7),
                                   ),
                                 ),
-                                child: const Text('Start'),
+                                child: Text('start'.tr()),
                               ),
                             ),
                           ),

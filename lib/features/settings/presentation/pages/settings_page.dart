@@ -77,18 +77,18 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
           ),
           SizedBox(height: spacing),
           SegmentedButton<ThemeMode>(
-            segments: const <ButtonSegment<ThemeMode>>[
+            segments:  <ButtonSegment<ThemeMode>>[
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.system,
-                label: Text('System'),
+                label: Text('system'.tr()),
               ),
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.light,
-                label: Text('Light'),
+                label: Text('light'.tr()),
               ),
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.dark,
-                label: Text('Dark'),
+                label: Text('dark'.tr()),
               ),
             ],
             selected: <ThemeMode>{themeMode},
@@ -99,12 +99,12 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             },
           ),
           SizedBox(height: spacing),
-          Text('Sound Alert', style: Theme.of(context).textTheme.titleMedium),
+          Text('sound_alert'.tr(), style: Theme.of(context).textTheme.titleMedium),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
-              ButtonSegment<bool>(value: true, label: Text('On')),
-              ButtonSegment<bool>(value: false, label: Text('Off')),
+              ButtonSegment<bool>(value: true, label: Text('on'.tr())),
+              ButtonSegment<bool>(value: false, label: Text('off'.tr())),
             ],
             selected: <bool>{soundAlert},
             onSelectionChanged: (selection) async {
@@ -115,12 +115,12 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             },
           ),
           SizedBox(height: spacing),
-          Text('Vibration', style: Theme.of(context).textTheme.titleMedium),
+          Text('vibration'.tr(), style: Theme.of(context).textTheme.titleMedium),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
-              ButtonSegment<bool>(value: true, label: Text('On')),
-              ButtonSegment<bool>(value: false, label: Text('Off')),
+              ButtonSegment<bool>(value: true, label: Text('on'.tr())),
+              ButtonSegment<bool>(value: false, label: Text('off'.tr())),
             ],
             selected: <bool>{vibration},
             onSelectionChanged: (selection) async {
@@ -132,14 +132,14 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
           ),
           SizedBox(height: spacing),
           Text(
-            'Contacts alerts',
+            'contacts_alerts'.tr(),
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
-              ButtonSegment<bool>(value: true, label: Text('On')),
-              ButtonSegment<bool>(value: false, label: Text('Off')),
+              ButtonSegment<bool>(value: true, label: Text('on'.tr())),
+              ButtonSegment<bool>(value: false, label: Text('off'.tr())),
             ],
             selected: <bool>{contactsAlert},
             onSelectionChanged: (selection) async {
@@ -150,12 +150,12 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             },
           ),
           SizedBox(height: spacing),
-          Text('Mobile alerts', style: Theme.of(context).textTheme.titleMedium),
+          Text('mobile_alerts'.tr(), style: Theme.of(context).textTheme.titleMedium),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
-              ButtonSegment<bool>(value: true, label: Text('On')),
-              ButtonSegment<bool>(value: false, label: Text('Off')),
+              ButtonSegment<bool>(value: true, label: Text('on'.tr())),
+              ButtonSegment<bool>(value: false, label: Text('off'.tr())),
             ],
             selected: <bool>{mobileAlerts},
             onSelectionChanged: (selection) async {

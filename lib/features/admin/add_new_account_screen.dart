@@ -1,4 +1,5 @@
 import 'package:drivesense/features/auth/profile_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,7 @@ class _AddNewAccountScreenState extends ConsumerState<AddNewAccountScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Create New Account')),
+        appBar: AppBar(title: Text('create_new_account'.tr())),
         bottomNavigationBar: BottomAppBar(
           child: ElevatedButton(
             onPressed: () async {
@@ -47,7 +48,7 @@ class _AddNewAccountScreenState extends ConsumerState<AddNewAccountScreen> {
               backgroundColor: Colors.green,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Create Now'),
+            child: Text('create_now'.tr()),
           ),
         ),
         body: SingleChildScrollView(
@@ -61,36 +62,36 @@ class _AddNewAccountScreenState extends ConsumerState<AddNewAccountScreen> {
                 children: [
                   TextFormField(
                     controller: nameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Name',
+                    decoration:  InputDecoration(
+                      labelText: 'name'.tr(),
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.person),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your name';
+                        return 'please_enter_your_name'.tr();
                       }
                       return null;
                     },
                   ),
                   TextFormField(
                     controller: idController,
-                    decoration: const InputDecoration(
-                      labelText: 'ID',
+                    decoration: InputDecoration(
+                      labelText: 'id'.tr(),
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.numbers),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your ID';
+                        return 'please_enter_your_id'.tr();
                       }
                       return null;
                     },
                   ),
                   SegmentedButton<bool>(
-                    segments: const [
-                      ButtonSegment<bool>(value: true, label: Text('Admin')),
-                      ButtonSegment<bool>(value: false, label: Text('Driver')),
+                    segments:  [
+                      ButtonSegment<bool>(value: true, label: Text('admin'.tr())),
+                      ButtonSegment<bool>(value: false, label: Text('driver'.tr())),
                     ],
                     selected: {isAdmin},
                     onSelectionChanged: (selection) {

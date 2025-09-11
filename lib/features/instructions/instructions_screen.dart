@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -16,28 +17,28 @@ class InstructionsScreenState extends ConsumerState<InstructionsScreen> {
     super.initState();
 
     listContentConfig.add(
-      const ContentConfig(
-        title: "Welcome",
+       ContentConfig(
+        title: "welcome".tr(),
         description:
-        "Welcome in DriveSense App , where you can monitor drivers",
+        "welcome_to_drive_sense".tr(),
         pathImage: "assets/steps/welcome.png",
         backgroundColor: Color(0xfff5a623),
       ),
     );
     listContentConfig.add(
-      const ContentConfig(
-        title: "Connect Raspberry Pi",
+      ContentConfig(
+        title: "connect_raspberry_pi".tr(),
         description:
-        "make sure that you connect the raspberry pi to the internet",
+        "make_sure_you".tr(),
         pathImage: "assets/steps/connect.png",
         backgroundColor: Color(0xff203152),
       ),
     );
     listContentConfig.add(
-      const ContentConfig(
-        title: "Get Started",
+      ContentConfig(
+        title: "get_started".tr(),
         description:
-        "Go to Drive page and start driving",
+        "go_to_drive_page".tr(),
         pathImage: "assets/steps/get_started.png",
         backgroundColor: Color(0xff9932CC),
       ),

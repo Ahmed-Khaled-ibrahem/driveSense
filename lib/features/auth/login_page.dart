@@ -81,7 +81,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           }
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text('user role mistake')));
+          ).showSnackBar(SnackBar(content: Text('you_can_not_choose_wrong_profile_role'.tr())));
         }
       } else {
         setState(() {
@@ -147,8 +147,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       activeColor: Theme.of(context).primaryColor,
                     ),
                     const SizedBox(width: 6),
-                    const Text(
-                      "Remember me",
+                     Text(
+                      "remember_me".tr(),
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -157,9 +157,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ],
                 ),
                 SegmentedButton<bool>(
-                  segments: const [
-                    ButtonSegment<bool>(value: true, label: Text('Admin')),
-                    ButtonSegment<bool>(value: false, label: Text('Driver')),
+                  segments:  [
+                    ButtonSegment<bool>(value: true, label: Text('admin'.tr())),
+                    ButtonSegment<bool>(value: false, label: Text('driver'.tr())),
                   ],
                   selected: {isAdmin},
                   onSelectionChanged: (selection) {
@@ -172,8 +172,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 TextFormField(
                   controller: _idController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'ID',
+                  decoration:  InputDecoration(
+                    labelText: 'id'.tr(),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
