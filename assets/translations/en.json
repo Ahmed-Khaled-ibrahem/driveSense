@@ -15,7 +15,7 @@
   "auth.welcome": "Welcome Back",
   "auth.email": "Email",
   "auth.password": "Password",
-  "auth.email_required": "Email is required",
+  "auth.email_required": "ID is required",
   "auth.email_invalid": "Please enter a valid email",
   "auth.password_required": "Password is required",
   "auth.password_min_length": "Password must be at least 6 characters",

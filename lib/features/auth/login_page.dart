@@ -9,7 +9,6 @@ import '../../app/services/firebase_realtime_db.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
-
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
 }

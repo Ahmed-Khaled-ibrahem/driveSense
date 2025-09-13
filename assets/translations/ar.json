@@ -15,7 +15,7 @@
   "auth.welcome": "مرحبًا بعودتك",
   "auth.email": "البريد الإلكتروني",
   "auth.password": "كلمة المرور",
-  "auth.email_required": "البريد الإلكتروني مطلوب",
+  "auth.email_required": "الرقم التعريفي مطلوب",
   "auth.email_invalid": "يرجى إدخال بريد إلكتروني صحيح",
   "auth.password_required": "كلمة المرور مطلوبة",
   "auth.password_min_length": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
