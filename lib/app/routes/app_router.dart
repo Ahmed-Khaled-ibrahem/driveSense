@@ -2,12 +2,13 @@ import 'package:drivesense/features/settings/presentation/pages/settings_page.da
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/admin/add_new_account_screen.dart';
 import '../../features/admin/admin_home.dart';
 import '../../features/admin/profile_view_screen.dart';
 import '../../features/alert/alert_screen.dart';
-import '../../features/auth/login_page.dart';
-import '../../features/auth/profile_model.dart';
+import '../../features/auth2/login/forget_password.dart';
+import '../../features/auth2/login/login_screen.dart';
+import '../../features/auth2/login/signin_error_screen.dart';
+import '../../features/auth2/signup/sign_up_screen.dart';
 import '../../features/home/homeScreen.dart';
 import '../../features/splash_screen/view/splash_screen.dart';
 import '../wrapper/app_wrapper.dart';
@@ -31,11 +32,19 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
           GoRoute(
             path: '/login',
-            builder: (context, state) => const LoginPage(),
+            builder: (context, state) => const LoginScreen(),
           ),
           GoRoute(
-            path: '/add-new-account',
-            builder: (context, state) => const AddNewAccountScreen(),
+            path: '/reset-password',
+            builder: (context, state) => const ResetPasswordScreen(),
+          ),
+          GoRoute(
+            path: '/signup',
+            builder: (context, state) => const SignUpScreen(),
+          ),
+          GoRoute(
+            path: '/error',
+            builder: (context, state) => const SignInErrorScreen(),
           ),
           GoRoute(
             path: '/alert',
@@ -44,15 +53,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/admin',
             builder: (context, state) {
-              final profile = state.extra as Profile;
-              return AdminHome(profile);
+              return AdminHome();
             },
           ),
           GoRoute(
             path: '/home',
             builder: (context, state) {
-              final profile = state.extra as Profile;
-              return Homescreen(profile: profile);
+              return Homescreen();
             },
           ),
           GoRoute(

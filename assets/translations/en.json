@@ -25,6 +25,40 @@
   "sound_alert": "Sound Alert",
   "on": "On",
   "off": "Off",
+
+  "Please enter your phone number": "Please enter your phone number",
+  "Phone": "Phone",
+  "Sign In": "Sign In",
+  "Already have an account?": "Already have an account?",
+  "Passwords do not match": "Passwords do not match",
+  "Please confirm your password": "Please confirm your password",
+  "Confirm Password": "Confirm Password",
+  "Please enter your name": "Please enter your name",
+  "Full Name": "Full Name",
+  "Create your account to get started": "Create your account to get started",
+  "Join Us": "Join Us",
+  "Create Account": "Create Account",
+
+
+
+  "email": "Email",
+  "Send Reset Link": "Send Reset Link",
+  "www": "Enter your email address and we\\'ll send you a link to reset your password",
+  "Reset Password": "Reset Password",
+  "Password reset email sent. Check your inbox.": "Password reset email sent. Check your inbox.",
+  "Sign Up": "Sign Up",
+  "Don't have an account?": "Don't have an account?",
+  "Password": "Password",
+  "Forgot Password?": "Forgot Password?",
+  "Password must be at least 6 characters": "Password must be at least 6 characters",
+  "Please enter your password": "Please enter your password",
+  "Please enter a valid email": "Please enter a valid email",
+  "Please enter your email": "Please enter your email",
+
+
+
+
+
   "vibration": "Vibration",
   "contacts_alerts": "Contacts alerts",
   "mobile_alerts": "Mobile alerts",

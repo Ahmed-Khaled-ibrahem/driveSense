@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/reports_driver/session_provider.dart';
+import '../../services/auth_controller.dart';
+import '../models/auth_state.dart';
+import '../models/user_profile.dart';
+import '../providers/all_app_provider.dart';
+import '../providers/current_profile_provider.dart';
 import '../routes/app_router.dart';
 import '../services/firebase_realtime_db.dart';
 
@@ -17,6 +22,56 @@ class AppWrapper extends ConsumerStatefulWidget {
 }
 
 class AppWrapperState extends ConsumerState<AppWrapper> {
+  bool _listenerSet = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // We ensure this listener is added only once
+    if (_listenerSet) return;
+    _listenerSet = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      globalContainer.listen<AuthState>(authControllerProvider, (
+        previous,
+        next,
+      ) {
+        final router = GoRouter.of(context);
+        final currentLocation = router.state.uri.toString();
+        String? targetRoute;
+
+        switch (next) {
+          case AuthInitial():
+          case AuthLoading():
+            targetRoute = '/';
+            break;
+
+          case AuthAuthenticated():
+            final profile = next.profile;
+            if (profile.role == UserRole.admin) {
+              targetRoute = '/admin';
+            } else if (profile.role == UserRole.driver) {
+              targetRoute = '/home';
+            }
+            break;
+
+          case AuthUnauthenticated():
+            targetRoute = '/login';
+            break;
+
+          case AuthError():
+            targetRoute = '/error';
+            break;
+        }
+
+        if (targetRoute != null && currentLocation != targetRoute) {
+          router.go(targetRoute);
+        }
+      });
+    });
+  }
+
   FirebaseDatabaseHelper dbHelper = FirebaseDatabaseHelper.instance;
 
   onChange(isDetected) {

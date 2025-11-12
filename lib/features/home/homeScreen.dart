@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../auth/profile_model.dart';
 import '../contacts/contacts_Screen.dart';
 import '../drive/drive_screen.dart';
 import '../instructions/instructions_screen.dart';
@@ -9,9 +8,7 @@ import '../reports_driver/reports.dart';
 import '../settings/presentation/pages/settings_page.dart';
 
 class Homescreen extends ConsumerStatefulWidget {
-  final Profile profile;
-
-  const Homescreen({super.key, required this.profile});
+  const Homescreen({super.key});
 
   @override
   ConsumerState createState() => _HomescreenState();
@@ -28,8 +25,8 @@ class _HomescreenState extends ConsumerState<Homescreen> {
   void initState() {
     super.initState();
     _pages = [
-      DriveScreen(widget.profile),
-      ReportsScreen(profile: widget.profile,),
+      DriveScreen(),
+      ReportsScreen(),
       SettingsPage(),
       InstructionsScreen(),
       ContactsScreen(),

@@ -21,9 +21,11 @@ dependencies:
   lottie: ^3.3.1
   flutter_webrtc: ^1.1.0
   http: ^1.5.0
-  firebase_core: ^2.20.0
-  firebase_database: ^10.1.0
+  firebase_core: ^3.8.1
+  firebase_database: ^11.3.5
   timelines_plus: ^1.0.7
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.2
 
 dev_dependencies:
   flutter_test:

@@ -10,7 +10,7 @@ import 'helpers/scafold_message.dart';
 class App extends ConsumerWidget {
   App({super.key});
 
-  final DateTime expiryDate = DateTime(2025, 10, 29);
+  final DateTime expiryDate = DateTime(2026, 12, 29);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

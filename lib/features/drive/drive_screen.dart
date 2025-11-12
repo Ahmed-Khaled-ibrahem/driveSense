@@ -1,16 +1,15 @@
-import 'package:drivesense/features/auth/profile_model.dart';
+
 import 'package:drivesense/features/drive/providers/online_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../app/providers/current_profile_provider.dart';
 import '../reports_driver/session_provider.dart';
 import 'camera_stream_widget.dart';
 
 class DriveScreen extends ConsumerStatefulWidget {
-  final Profile profile;
-
-  const DriveScreen(this.profile, {super.key});
+  const DriveScreen( {super.key});
 
   @override
   DriveScreenState createState() => DriveScreenState();
@@ -23,8 +22,9 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
   @override
   void initState() {
     super.initState();
+    final profile = ref.read(currentUserProfileProvider);
     db = FirebaseDatabase.instance.ref(
-      'profiles/${widget.profile.id}/sessions',
+      'profiles/${profile?.userId}/sessions',
     );
   }
 
@@ -32,6 +32,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
   Widget build(BuildContext context) {
     final online = ref.watch(onlineStatusProvider);
     final reporter = ref.read(reportingSessionProvider.notifier);
+    final profile = ref.read(currentUserProfileProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Drive Sense'), centerTitle: true),
@@ -64,7 +65,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                   radius: 30,
                   backgroundColor: Colors.black38,
                   child: Text(
-                    widget.profile.name[0].toUpperCase(),
+                    profile?.name[0].toUpperCase() ?? '',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
@@ -86,7 +87,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
                         ),
                       ),
                       Text(
-                        widget.profile.name,
+                        profile?.name ?? '',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,

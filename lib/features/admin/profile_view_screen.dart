@@ -1,18 +1,18 @@
-import 'package:drivesense/features/auth/profile_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timelines_plus/timelines_plus.dart';
+import '../../app/models/user_profile.dart';
 import '../../app/services/firebase_realtime_db.dart';
 import '../../app/theme/theme_provider.dart';
 import '../reports_driver/session_provider.dart';
 import '../reports_driver/trip_session_model.dart';
 
 class ProfileViewScreen extends ConsumerStatefulWidget {
-  final Profile profile;
-  final Profile myProfile;
+  final UserProfile profile;
+  final UserProfile myProfile;
 
   const ProfileViewScreen({
     super.key,
@@ -35,7 +35,7 @@ class _ProfileViewScreenState extends ConsumerState<ProfileViewScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              if (widget.profile.id == widget.myProfile.id) {
+              if (widget.profile.userId == widget.myProfile.userId) {
                 // you can not remove your own profile
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -78,7 +78,7 @@ class _ProfileViewScreenState extends ConsumerState<ProfileViewScreen> {
           const SizedBox(height: 5),
           Center(
             child: Text(
-              widget.profile.id.toUpperCase(),
+              widget.profile.userId.toUpperCase(),
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             ),
           ),
@@ -93,7 +93,7 @@ class _ProfileViewScreenState extends ConsumerState<ProfileViewScreen> {
 class ReportsScreen extends ConsumerStatefulWidget {
   const ReportsScreen({super.key, required this.profile});
 
-  final Profile profile;
+  final UserProfile profile;
 
   @override
   ReportsScreenState createState() => ReportsScreenState();
@@ -106,7 +106,7 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
   void initState() {
     super.initState();
     db = FirebaseDatabase.instance.ref(
-      'profiles/${widget.profile.id}/sessions',
+      'profiles/${widget.profile.userId}/sessions',
     );
   }
 

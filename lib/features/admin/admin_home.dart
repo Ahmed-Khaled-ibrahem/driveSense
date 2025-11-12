@@ -2,14 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../app/models/user_profile.dart';
+import '../../app/providers/current_profile_provider.dart';
 import '../../app/services/firebase_realtime_db.dart';
-import '../auth/profile_model.dart';
 
 class AdminHome extends ConsumerStatefulWidget {
-  final Profile profile;
-
-  const AdminHome(this.profile, {super.key});
-
+  const AdminHome({super.key});
   @override
   AdminHomeState createState() => AdminHomeState();
 }
@@ -19,6 +17,8 @@ class AdminHomeState extends ConsumerState<AdminHome> {
 
   @override
   Widget build(BuildContext context) {
+    final profile = ref.read(currentUserProfileProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Drive Sense'),
@@ -32,13 +32,13 @@ class AdminHomeState extends ConsumerState<AdminHome> {
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.push('/add-new-account');
-        },
-        backgroundColor: Color(0xff450a85),
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     context.push('/add-new-account');
+      //   },
+      //   backgroundColor: Color(0xff450a85),
+      //   child: const Icon(Icons.add, color: Colors.white),
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                   radius: 30,
                   backgroundColor: Colors.black38,
                   child: Text(
-                    widget.profile.name[0].toUpperCase(),
+                    profile?.name[0].toUpperCase() ?? '',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
@@ -90,7 +90,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                         ),
                       ),
                       Text(
-                        widget.profile.name,
+                        profile?.name ?? '',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -119,7 +119,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<List<Profile>>(
+            child: FutureBuilder<List<UserProfile>>(
               future: dbHelper.getProfiles(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
@@ -151,7 +151,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                       onTap: () {
                         context.push(
                           '/view-profile',
-                          extra: {"profile": p, "myProfile": widget.profile},
+                          extra: {"profile": p, "myProfile": profile},
                         );
                       },
                       leading: Container(
@@ -170,7 +170,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                       ),
                       title: Text(p.name, style: const TextStyle(fontSize: 14)),
                       subtitle: Text(
-                        p.id,
+                        p.userId,
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,

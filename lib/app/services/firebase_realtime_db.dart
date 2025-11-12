@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:drivesense/features/auth/profile_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
 import '../../features/contacts/contact_model.dart';
+import '../models/user_profile.dart';
 
 class FirebaseDatabaseHelper {
   final FirebaseDatabase _database = FirebaseDatabase.instance;
@@ -28,37 +28,37 @@ class FirebaseDatabaseHelper {
     return snapshot.value;
   }
 
-  Future<List<Profile>> getProfiles() async {
-    final profilesRef = _database.ref('profiles');
-    final snapshot = await profilesRef.get();
+  Future<List<UserProfile>> getProfiles() async {
+    // final profilesRef = _database.ref('profiles');
+    // final snapshot = await profilesRef.get();
+    //
+    // if (!snapshot.exists) return [];
+    //
+    // final data = snapshot.value as Map<dynamic, dynamic>;
+    // List<Profile> profiles = [];
+    //
+    // data.forEach((key, value) {
+    //   profiles.add(Profile.fromMap(Map<String, dynamic>.from(value)));
+    // });
 
-    if (!snapshot.exists) return [];
-
-    final data = snapshot.value as Map<dynamic, dynamic>;
-    List<Profile> profiles = [];
-
-    data.forEach((key, value) {
-      profiles.add(Profile.fromMap(Map<String, dynamic>.from(value)));
-    });
-
-    return profiles;
+    return [];
   }
 
   void setAlertOff() async {
     await _database.ref('live/detected').set(false);
   }
 
-  Future<void> addProfile(Profile profile) async {
-    final newRef = _database.ref('profiles').child(profile.id);
-    await newRef.set(profile.toMap());
+  Future<void> addProfile(UserProfile profile) async {
+    // final newRef = _database.ref('profiles').child(profile.id);
+    // await newRef.set(profile.toMap());
   }
 
-  Future<void> updateProfile(Profile profile) async {
-    await _database.ref('profiles').child(profile.id).update(profile.toMap());
+  Future<void> updateProfile(UserProfile profile) async {
+    // await _database.ref('profiles').child(profile.id).update(profile.toMap());
   }
 
-  Future<void> deleteProfile(Profile profile) async {
-    await _database.ref('profiles').child(profile.id).remove();
+  Future<void> deleteProfile(UserProfile profile) async {
+    // await _database.ref('profiles').child(profile.id).remove();
   }
 
   /// Listen to changes at a path

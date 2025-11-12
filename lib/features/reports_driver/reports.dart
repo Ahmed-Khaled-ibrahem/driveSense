@@ -5,13 +5,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timelines_plus/timelines_plus.dart';
+import '../../app/models/user_profile.dart';
+import '../../app/providers/current_profile_provider.dart';
 import '../../app/theme/theme_provider.dart';
-import '../auth/profile_model.dart';
+
 
 class ReportsScreen extends ConsumerStatefulWidget {
-  const ReportsScreen({super.key, required this.profile});
-
-  final Profile profile;
+  const ReportsScreen({super.key});
 
   @override
   ReportsScreenState createState() => ReportsScreenState();
@@ -23,8 +23,9 @@ class ReportsScreenState extends ConsumerState<ReportsScreen> {
   @override
   void initState() {
     super.initState();
+    final profile = ref.read(currentUserProfileProvider);
     db = FirebaseDatabase.instance.ref(
-      'profiles/${widget.profile.id}/sessions',
+      'profiles/${profile?.userId}/sessions',
     );
   }
 
