@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../app/models/auth_state.dart';
 import '../app/models/user_profile.dart';
+import '../app/services/firebase_realtime_db.dart';
 import '../services/local_storage_service.dart';
 import 'auth_services.dart';
 import 'firestore_services.dart';
@@ -85,18 +86,18 @@ class AuthController extends StateNotifier<AuthState> {
       if (user == null) {
         throw 'User creation failed';
       }
-
-      print('User ID: ${user.uid}');
-      print('Profile: $profile');
       
       // Create profile in Firestore
       final newProfile = profile.copyWith(userId: user.uid);
 
-      print('New Profile: $newProfile');
       await _firestoreService.createUserProfile(user.uid, newProfile);
+
+      FirebaseDatabaseHelper db = FirebaseDatabaseHelper.instance;
+      await db.addProfile(newProfile);
 
       // Save to local storage
       await _localStorage.saveUserProfile(newProfile);
+
       state = AuthAuthenticated(newProfile);
     } catch (e) {
       print('Error creating account: $e');

@@ -29,19 +29,19 @@ class FirebaseDatabaseHelper {
   }
 
   Future<List<UserProfile>> getProfiles() async {
-    // final profilesRef = _database.ref('profiles');
-    // final snapshot = await profilesRef.get();
-    //
-    // if (!snapshot.exists) return [];
-    //
-    // final data = snapshot.value as Map<dynamic, dynamic>;
-    // List<Profile> profiles = [];
-    //
-    // data.forEach((key, value) {
-    //   profiles.add(Profile.fromMap(Map<String, dynamic>.from(value)));
-    // });
+    final profilesRef = _database.ref('profiles');
+    final snapshot = await profilesRef.get();
 
-    return [];
+    if (!snapshot.exists) return [];
+
+    final data = snapshot.value as Map<dynamic, dynamic>;
+    List<UserProfile> profiles = [];
+
+    data.forEach((key, value) {
+      profiles.add(UserProfile.fromJson(Map<String, dynamic>.from(value)));
+    });
+
+    return profiles;
   }
 
   void setAlertOff() async {
@@ -49,16 +49,16 @@ class FirebaseDatabaseHelper {
   }
 
   Future<void> addProfile(UserProfile profile) async {
-    // final newRef = _database.ref('profiles').child(profile.id);
-    // await newRef.set(profile.toMap());
+    final newRef = _database.ref('profiles').child(profile.userId);
+    await newRef.set(profile.toJson());
   }
 
   Future<void> updateProfile(UserProfile profile) async {
-    // await _database.ref('profiles').child(profile.id).update(profile.toMap());
+    await _database.ref('profiles').child(profile.userId).update(profile.toJson());
   }
 
   Future<void> deleteProfile(UserProfile profile) async {
-    // await _database.ref('profiles').child(profile.id).remove();
+    await _database.ref('profiles').child(profile.userId).remove();
   }
 
   /// Listen to changes at a path
@@ -103,7 +103,7 @@ class FirebaseDatabaseHelper {
   Future<void> activateContact(Contact contact) async {
     final response = await http.get(
       Uri.parse(
-        "https://api.telegram.org/bot8268822841:AAFPlz2qDxpIoL2DiI-EqDJ1Ex1rXNP2j7I/getUpdates",
+        "https://api.telegram.org/bot8268822841:AAFIb7dUXPMNk3soX9d0TmtVxMzk6S-2RH4/getUpdates",
       ),
     );
 

@@ -170,7 +170,7 @@ class AdminHomeState extends ConsumerState<AdminHome> {
                       ),
                       title: Text(p.name, style: const TextStyle(fontSize: 14)),
                       subtitle: Text(
-                        p.userId,
+                        p.phone,
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.grey,

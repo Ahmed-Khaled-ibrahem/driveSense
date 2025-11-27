@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../app/services/firebase_realtime_db.dart';
 import '../../../../app/theme/theme_provider.dart';
+import '../../../../services/auth_controller.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
@@ -41,6 +42,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final ThemeMode themeMode = ref.watch(themeModeProvider);
+    final authController = ref.read(authControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: Text('settings.title'.tr())),
       body: ListView(
@@ -179,6 +181,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               final prefs = await SharedPreferences.getInstance();
               await prefs.setBool('rememberMe', false);
               context.go('/login');
+              authController.signOut();
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 8),
