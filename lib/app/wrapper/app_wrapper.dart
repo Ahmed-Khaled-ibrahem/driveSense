@@ -6,9 +6,9 @@ import '../../services/auth_controller.dart';
 import '../models/auth_state.dart';
 import '../models/user_profile.dart';
 import '../providers/all_app_provider.dart';
-import '../providers/current_profile_provider.dart';
 import '../routes/app_router.dart';
 import '../services/firebase_realtime_db.dart';
+import '../theme/theme_provider.dart';
 
 final isAlertOpenProvider = StateProvider<bool>((ref) => false);
 

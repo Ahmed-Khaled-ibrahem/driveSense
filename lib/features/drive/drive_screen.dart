@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/providers/current_profile_provider.dart';
+import '../../app/theme/theme_provider.dart';
 import '../reports_driver/session_provider.dart';
 import 'camera_stream_widget.dart';
 
@@ -33,6 +34,7 @@ class DriveScreenState extends ConsumerState<DriveScreen> {
     final online = ref.watch(onlineStatusProvider);
     final reporter = ref.read(reportingSessionProvider.notifier);
     final profile = ref.read(currentUserProfileProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Drive Sense'), centerTitle: true),

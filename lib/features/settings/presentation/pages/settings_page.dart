@@ -10,6 +10,7 @@ import '../../../../services/auth_controller.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
+
   @override
   SettingsPageState createState() => SettingsPageState();
 }
@@ -58,11 +59,11 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
           SegmentedButton<Locale>(
             segments: <ButtonSegment<Locale>>[
               ButtonSegment<Locale>(
-                value: const Locale('en'),
+                value: Locale('en'),
                 label: Text('language.en'.tr()),
               ),
               ButtonSegment<Locale>(
-                value: const Locale('ar'),
+                value: Locale('ar'),
                 label: Text('language.ar'.tr()),
               ),
             ],
@@ -79,7 +80,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
           ),
           SizedBox(height: spacing),
           SegmentedButton<ThemeMode>(
-            segments:  <ButtonSegment<ThemeMode>>[
+            segments: <ButtonSegment<ThemeMode>>[
               ButtonSegment<ThemeMode>(
                 value: ThemeMode.system,
                 label: Text('system'.tr()),
@@ -101,7 +102,10 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             },
           ),
           SizedBox(height: spacing),
-          Text('sound_alert'.tr(), style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            'sound_alert'.tr(),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
@@ -117,7 +121,10 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             },
           ),
           SizedBox(height: spacing),
-          Text('vibration'.tr(), style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            'vibration'.tr(),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[
@@ -152,7 +159,10 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
             },
           ),
           SizedBox(height: spacing),
-          Text('mobile_alerts'.tr(), style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            'mobile_alerts'.tr(),
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           SizedBox(height: spacing),
           SegmentedButton<bool>(
             segments: <ButtonSegment<bool>>[

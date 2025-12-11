@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../app/theme/theme_provider.dart';
 import '../contacts/contacts_Screen.dart';
 import '../drive/drive_screen.dart';
 import '../instructions/instructions_screen.dart';
@@ -9,7 +10,6 @@ import '../settings/presentation/pages/settings_page.dart';
 
 class Homescreen extends ConsumerStatefulWidget {
   const Homescreen({super.key});
-
   @override
   ConsumerState createState() => _HomescreenState();
 }
@@ -35,8 +35,9 @@ class _HomescreenState extends ConsumerState<Homescreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ref.watch(themeModeProvider);
     return Scaffold(
-      body: IndexedStack(index: _currentIndex, children: _pages),
+      body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
